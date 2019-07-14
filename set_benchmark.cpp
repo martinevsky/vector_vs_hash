@@ -37,7 +37,6 @@ public:
     UnsortedVector (DataConstRange data):
         m_data (data.begin(), data.end())
     {
-        std::sort (m_data.begin(), m_data.end());
     }
 
     bool Find (ValueType value) const noexcept
