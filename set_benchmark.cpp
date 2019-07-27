@@ -1,6 +1,7 @@
 #include <set>
 #include <vector>
 #include <random>
+#include <iostream>
 #include <algorithm>
 #include <unordered_set>
 
@@ -144,7 +145,7 @@ void BM_Find (benchmark::State& state)
 
 	for (auto _ : state)
 	{
-		const constexpr size_t iterations = 100'000;
+		const constexpr size_t iterations = 1'000;
         const auto val = generator();
 		for (size_t ii = 0; ii < iterations; ++ii)
             benchmark::DoNotOptimize (set.Find (val));
@@ -156,12 +157,11 @@ void BM_Find (benchmark::State& state)
 
 const constexpr size_t Step   = 2;
 const constexpr size_t Start  = 16;
+// const constexpr size_t Finish = 1024;
 const constexpr size_t Finish = 1<<21;
 
 BENCHMARK_TEMPLATE (BM_Find, SortedVector)->RangeMultiplier (Step)->Range (Start, Finish)->Complexity();
-BENCHMARK_TEMPLATE (BM_Find, UnsortedVector)->RangeMultiplier (Step)->Range (Start, 65536)->Complexity();
+BENCHMARK_TEMPLATE (BM_Find, UnsortedVector)->RangeMultiplier (Step)->Range (Start, 8192)->Complexity();
 BENCHMARK_TEMPLATE (BM_Find, StdSet)->RangeMultiplier (Step)->Range (Start, Finish)->Complexity();
 BENCHMARK_TEMPLATE (BM_Find, StdUnorderedSet)->RangeMultiplier (Step)->Range (Start, Finish)->Complexity();
 BENCHMARK_TEMPLATE (BM_Find, BoostIntrusiveUnorderedSet)->RangeMultiplier (Step)->Range (Start, Finish)->Complexity();
-
-BENCHMARK_MAIN();

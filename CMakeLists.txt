@@ -17,7 +17,11 @@ add_subdirectory (./external/benchmark)
 include_directories (./external/benchmark/include) 
 link_libraries (benchmark)
 
-add_executable (set_benchmark set_benchmark.cpp)
+add_executable (set_benchmark 
+	set_benchmark.cpp 
+	report_template.cpp 
+	main.cpp
+)
 
 #Testing
 set (gtest_force_shared_crt ON)
